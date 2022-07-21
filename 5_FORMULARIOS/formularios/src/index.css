@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.formulario {
+  width: fit-content;
+  margin: 0px auto;
+  background-color: rgb(238, 238, 238);
+  padding: 10px 50px 50px 50px;
+}
+
+input, select{
+  height: 30px;
+}
+
+label {
+  text-align: left;
+}
+
+input[type=text], input[type=password], textarea, select{
+margin-left: 5px;
+padding-left: 10px;
+}
+
+.login, .senha, textarea{
+  display: block;
+  margin: 5px;
+  height: auto;
+}
+input[type=submit]{
+  cursor: pointer;
+}
+
+#btn-login{
+  display: flex;
+  justify-content: right;
+  margin-right: 5px;
+}
+
+textarea, select{
+  width: 100%;
+  margin: 5px 5px;
+}
