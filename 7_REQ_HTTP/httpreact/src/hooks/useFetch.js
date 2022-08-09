@@ -10,6 +10,7 @@ export const useFetch = (URL) => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [itemId, setItemId] = useState(null);
 
 
     // Popula os dados de configurações para requisições POST.
@@ -22,6 +23,13 @@ export const useFetch = (URL) => {
                     body: JSON.stringify(data)
                 });
             setMethod(method);
+        } else if (method === "DELETE") {
+            setConfig(
+                {
+                    method
+                });
+            setMethod(method);
+            setItemId(data)
         }
     }
 
@@ -50,12 +58,17 @@ export const useFetch = (URL) => {
     // Executar o GET quando a requisição for POST
     useEffect(() => {
         const httpRequest = async () => {
+            let json;
             if (method === "POST") {
                 let fetchOptions = [URL, config];
                 const response = await fetch(...fetchOptions);
-                const json = response.json();
-                setCallFetch(json);
+                json = response.json();
+            } else if (method === "DELETE") {
+                const deleteUrl = `${URL}/${itemId}`
+                const response = await fetch(deleteUrl, config);
+                json = response.json();
             }
+            setCallFetch(json);
         }
 
         httpRequest();
