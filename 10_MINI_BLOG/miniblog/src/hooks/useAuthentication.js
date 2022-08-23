@@ -63,44 +63,42 @@ export const useAuthentication = () => {
         }
     };
 
-    // const logout = () => {
-    //     checkIfIsCancelled();
+    const logout = () => {
+        checkIfIsCancelled();
 
-    //     signOut(auth);
-    // };
+        signOut(auth);
+    };
 
-    // const login = async (data) => {
-    //     checkIfIsCancelled();
+    const login = async (data) => {
+        checkIfIsCancelled();
 
-    //     setLoading(true);
-    //     setError(false);
+        setLoading(true);
+        setError(false);
 
-    //     try {
-    //         await signInWithEmailAndPassword(auth, data.email, data.password);
-    //     } catch (error) {
-    //         console.log(error.message);
-    //         console.log(typeof error.message);
-    //         console.log(error.message.includes("user-not"));
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password);
+            setLoading(false);
+        } catch (error) {
+            console.log(error.message);
+            console.log(typeof error.message);
+            console.log(error.message.includes("user-not"));
 
-    //         let systemErrorMessage;
+            let systemErrorMessage;
 
-    //         if (error.message.includes("user-not-found")) {
-    //             systemErrorMessage = "Usuário não encontrado.";
-    //         } else if (error.message.includes("wrong-password")) {
-    //             systemErrorMessage = "Senha incorreta.";
-    //         } else {
-    //             systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
-    //         }
+            if (error.message.includes("user-not-found")) {
+                systemErrorMessage = "Usuário não encontrado.";
+            } else if (error.message.includes("wrong-password")) {
+                systemErrorMessage = "Senha incorreta.";
+            } else {
+                systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde.";
+            }
 
-    //         console.log(systemErrorMessage);
+            console.log(systemErrorMessage);
 
-    //         setError(systemErrorMessage);
-    //     }
-
-    //     console.log(error);
-
-    //     setLoading(false);
-    // };
+            setError(systemErrorMessage);
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         return () => setCancelled(true);
@@ -110,8 +108,8 @@ export const useAuthentication = () => {
         auth,
         createUser,
         error,
-        // logout,
-        // login,
+        logout,
+        login,
         loading,
     };
 };
