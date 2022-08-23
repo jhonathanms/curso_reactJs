@@ -1,4 +1,6 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import styles from './Register.module.css';
+import { useAuthentication } from '../../hooks/useAuthentication';
 
 const Register = () => {
   const [displayName, setDisplayName] = useState("");
@@ -13,7 +15,6 @@ const Register = () => {
     e.preventDefault();
 
     setError("");
-
     const user = {
       displayName,
       email,
@@ -26,7 +27,6 @@ const Register = () => {
     }
 
     const res = await createUser(user);
-
     console.log(res);
   };
 
